@@ -13,7 +13,8 @@ defmodule Relationships.ApprenticeshipQualifications.ProgrammeVersion do
   @doc false
   def changeset(programme_version, attrs) do
     programme_version
-    |> cast(attrs, [:version, :apprenticeship_qualification_id])
-    |> validate_required([:version, :apprenticeship_qualification_id])
+    |> cast(attrs, [:version])
+    |> cast_assoc(:apprenticeship_qualification, required: true)
+    |> validate_required([:version])
   end
 end

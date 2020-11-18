@@ -120,7 +120,7 @@ defmodule Relationships.ApprenticeshipQualificationsTest do
 
       programme_version =
         programme_version_fixture(%{
-          apprenticeship_qualification_id: apprenticeship_qualification.id
+          apprenticeship_qualification: apprenticeship_qualification
         })
 
       assert ApprenticeshipQualifications.list_programme_versions() == [programme_version]
@@ -131,7 +131,7 @@ defmodule Relationships.ApprenticeshipQualificationsTest do
 
       programme_version =
         programme_version_fixture(%{
-          apprenticeship_qualification_id: apprenticeship_qualification.id
+          apprenticeship_qualification: apprenticeship_qualification
         })
 
       assert ApprenticeshipQualifications.get_programme_version!(programme_version.id) ==
@@ -141,8 +141,7 @@ defmodule Relationships.ApprenticeshipQualificationsTest do
     test "create_programme_version/1 with valid data creates a programme_version" do
       apprenticeship_qualification = apprenticeship_qualification_fixture()
 
-      attrs =
-        Map.put(@valid_attrs, :apprenticeship_qualification_id, apprenticeship_qualification.id)
+      attrs = Map.put(@valid_attrs, :apprenticeship_qualification, apprenticeship_qualification)
 
       assert {:ok, %ProgrammeVersion{} = programme_version} =
                ApprenticeshipQualifications.create_programme_version(attrs)
@@ -166,7 +165,7 @@ defmodule Relationships.ApprenticeshipQualificationsTest do
 
       programme_version =
         programme_version_fixture(%{
-          apprenticeship_qualification_id: apprenticeship_qualification.id
+          apprenticeship_qualification: apprenticeship_qualification
         })
 
       assert {:ok, %ProgrammeVersion{} = programme_version} =
@@ -183,7 +182,7 @@ defmodule Relationships.ApprenticeshipQualificationsTest do
 
       programme_version =
         programme_version_fixture(%{
-          apprenticeship_qualification_id: apprenticeship_qualification.id
+          apprenticeship_qualification: apprenticeship_qualification
         })
 
       assert {:error, %Ecto.Changeset{}} =
@@ -201,7 +200,7 @@ defmodule Relationships.ApprenticeshipQualificationsTest do
 
       programme_version =
         programme_version_fixture(%{
-          apprenticeship_qualification_id: apprenticeship_qualification.id
+          apprenticeship_qualification: apprenticeship_qualification
         })
 
       assert {:ok, %ProgrammeVersion{}} =
@@ -217,7 +216,7 @@ defmodule Relationships.ApprenticeshipQualificationsTest do
 
       programme_version =
         programme_version_fixture(%{
-          apprenticeship_qualification_id: apprenticeship_qualification.id
+          apprenticeship_qualification: apprenticeship_qualification
         })
 
       assert %Ecto.Changeset{} =
