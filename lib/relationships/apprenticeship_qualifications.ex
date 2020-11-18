@@ -101,4 +101,100 @@ defmodule Relationships.ApprenticeshipQualifications do
   def change_apprenticeship_qualification(%ApprenticeshipQualification{} = apprenticeship_qualification, attrs \\ %{}) do
     ApprenticeshipQualification.changeset(apprenticeship_qualification, attrs)
   end
+
+  alias Relationships.ApprenticeshipQualifications.ProgrammeVersion
+
+  @doc """
+  Returns the list of programme_versions.
+
+  ## Examples
+
+      iex> list_programme_versions()
+      [%ProgrammeVersion{}, ...]
+
+  """
+  def list_programme_versions do
+    Repo.all(ProgrammeVersion)
+  end
+
+  @doc """
+  Gets a single programme_version.
+
+  Raises `Ecto.NoResultsError` if the Programme version does not exist.
+
+  ## Examples
+
+      iex> get_programme_version!(123)
+      %ProgrammeVersion{}
+
+      iex> get_programme_version!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_programme_version!(id), do: Repo.get!(ProgrammeVersion, id)
+
+  @doc """
+  Creates a programme_version.
+
+  ## Examples
+
+      iex> create_programme_version(%{field: value})
+      {:ok, %ProgrammeVersion{}}
+
+      iex> create_programme_version(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_programme_version(attrs \\ %{}) do
+    %ProgrammeVersion{}
+    |> ProgrammeVersion.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a programme_version.
+
+  ## Examples
+
+      iex> update_programme_version(programme_version, %{field: new_value})
+      {:ok, %ProgrammeVersion{}}
+
+      iex> update_programme_version(programme_version, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_programme_version(%ProgrammeVersion{} = programme_version, attrs) do
+    programme_version
+    |> ProgrammeVersion.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a programme_version.
+
+  ## Examples
+
+      iex> delete_programme_version(programme_version)
+      {:ok, %ProgrammeVersion{}}
+
+      iex> delete_programme_version(programme_version)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_programme_version(%ProgrammeVersion{} = programme_version) do
+    Repo.delete(programme_version)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking programme_version changes.
+
+  ## Examples
+
+      iex> change_programme_version(programme_version)
+      %Ecto.Changeset{data: %ProgrammeVersion{}}
+
+  """
+  def change_programme_version(%ProgrammeVersion{} = programme_version, attrs \\ %{}) do
+    ProgrammeVersion.changeset(programme_version, attrs)
+  end
 end
