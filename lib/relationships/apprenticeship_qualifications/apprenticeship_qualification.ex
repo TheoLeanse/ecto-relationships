@@ -1,9 +1,11 @@
 defmodule Relationships.ApprenticeshipQualifications.ApprenticeshipQualification do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Relationships.ApprenticeshipQualifications.ProgrammeVersion
 
   schema "apprenticeship_qualifications" do
     field :name, :string
+    has_many :programme_versions, ProgrammeVersion
 
     timestamps()
   end

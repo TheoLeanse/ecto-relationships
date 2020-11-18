@@ -67,7 +67,10 @@ defmodule Relationships.ApprenticeshipQualifications do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_apprenticeship_qualification(%ApprenticeshipQualification{} = apprenticeship_qualification, attrs) do
+  def update_apprenticeship_qualification(
+        %ApprenticeshipQualification{} = apprenticeship_qualification,
+        attrs
+      ) do
     apprenticeship_qualification
     |> ApprenticeshipQualification.changeset(attrs)
     |> Repo.update()
@@ -85,7 +88,9 @@ defmodule Relationships.ApprenticeshipQualifications do
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_apprenticeship_qualification(%ApprenticeshipQualification{} = apprenticeship_qualification) do
+  def delete_apprenticeship_qualification(
+        %ApprenticeshipQualification{} = apprenticeship_qualification
+      ) do
     Repo.delete(apprenticeship_qualification)
   end
 
@@ -98,7 +103,10 @@ defmodule Relationships.ApprenticeshipQualifications do
       %Ecto.Changeset{data: %ApprenticeshipQualification{}}
 
   """
-  def change_apprenticeship_qualification(%ApprenticeshipQualification{} = apprenticeship_qualification, attrs \\ %{}) do
+  def change_apprenticeship_qualification(
+        %ApprenticeshipQualification{} = apprenticeship_qualification,
+        attrs \\ %{}
+      ) do
     ApprenticeshipQualification.changeset(apprenticeship_qualification, attrs)
   end
 
@@ -115,6 +123,7 @@ defmodule Relationships.ApprenticeshipQualifications do
   """
   def list_programme_versions do
     Repo.all(ProgrammeVersion)
+    |> Repo.preload(:apprenticeship_qualification)
   end
 
   @doc """
@@ -131,7 +140,8 @@ defmodule Relationships.ApprenticeshipQualifications do
       ** (Ecto.NoResultsError)
 
   """
-  def get_programme_version!(id), do: Repo.get!(ProgrammeVersion, id)
+  def get_programme_version!(id),
+    do: Repo.get!(ProgrammeVersion, id) |> Repo.preload(:apprenticeship_qualification)
 
   @doc """
   Creates a programme_version.
@@ -147,6 +157,14 @@ defmodule Relationships.ApprenticeshipQualifications do
   """
   def create_programme_version(attrs \\ %{}) do
     %ProgrammeVersion{}
+    |> ProgrammeVersion.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def create_programme_version_for(%ApprenticeshipQualification{} = aq, attrs \\ %{}) do
+    aq
+    |> Ecto.build_assoc(:programme_versions)
+    |> Repo.preload(:apprenticeship_qualification)
     |> ProgrammeVersion.changeset(attrs)
     |> Repo.insert()
   end
