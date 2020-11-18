@@ -147,8 +147,13 @@ defmodule Relationships.ApprenticeshipQualificationsTest do
       assert {:ok, %ProgrammeVersion{} = programme_version} =
                ApprenticeshipQualifications.create_programme_version(attrs)
 
+      programme_version = Repo.preload(programme_version, :apprenticeship_qualification)
+
       assert programme_version.version == 42
       assert programme_version.apprenticeship_qualification_id == apprenticeship_qualification.id
+
+      assert programme_version.apprenticeship_qualification.name ==
+               apprenticeship_qualification.name
     end
 
     test "create_programme_version/1 with invalid data returns error changeset" do
