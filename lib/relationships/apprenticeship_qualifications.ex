@@ -162,8 +162,7 @@ defmodule Relationships.ApprenticeshipQualifications do
   end
 
   def create_programme_version_for(%ApprenticeshipQualification{} = aq, attrs \\ %{}) do
-    aq
-    |> Ecto.build_assoc(:programme_versions)
+    %ProgrammeVersion{apprenticeship_qualification_id: aq.id}
     |> Repo.preload(:apprenticeship_qualification)
     |> ProgrammeVersion.changeset(attrs)
     |> Repo.insert()
