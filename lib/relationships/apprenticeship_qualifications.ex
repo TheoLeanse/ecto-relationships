@@ -162,8 +162,7 @@ defmodule Relationships.ApprenticeshipQualifications do
   end
 
   def create_programme_version_for(%ApprenticeshipQualification{} = aq, attrs \\ %{}) do
-    %ProgrammeVersion{apprenticeship_qualification_id: aq.id}
-    |> Repo.preload(:apprenticeship_qualification)
+    %ProgrammeVersion{apprenticeship_qualification: aq}
     |> ProgrammeVersion.changeset(attrs)
     |> Repo.insert()
   end
